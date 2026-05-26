@@ -88,21 +88,35 @@ const FinancingSection = () => {
           </span>
  
           {/* arrows */}
-          <div className="flex gap-3">
-            <button
-              onClick={prev}
-              className="w-12 h-12 rounded-full flex items-center justify-center bg-[#AC8A3A] text-white"
-            >
-              <LuArrowLeft />
-            </button>
- 
-            <button
-              onClick={next}
-              className="w-12 h-12 rounded-full flex items-center justify-center bg-[#AC8A3A] text-white"
-            >
-              <LuArrowRight />
-            </button>
-          </div>
+          <div className="flex gap-4">
+  {/* LEFT BUTTON */}
+  <button
+    onClick={prev}
+    className={`
+      w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300
+      ${
+        index === 0
+          ? "bg-[#B88D2E4D] text-white"
+          : "bg-[#B89233] text-white"
+      }
+    `}
+  >
+    <LuArrowLeft className="text-[24px]" />
+  </button>
+
+  {/* RIGHT BUTTON */}
+  <button
+    onClick={next}
+    className="
+      w-14 h-14 rounded-full flex items-center justify-center
+      bg-[#E9DFC1] text-white
+      hover:bg-[#B89233]
+      transition-all duration-300
+    "
+  >
+    <LuArrowRight className="text-[24px]" />
+  </button>
+</div>
         </div>
  
         {/* RIGHT SLIDER */}
