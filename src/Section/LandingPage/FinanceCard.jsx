@@ -27,7 +27,7 @@ const FinanceCard = ({ title, text, isActive }) => {
   )}
       </h3>
 
-      <p className="font-montserrat text-[16px] md:text-[20px] leading-relaxed relative z-10 max-w-sm">
+      <p className="font-montserrat text-[16px] md:text-[14px] mdLtext-[16px] xl:text-[20px] leading-relaxed relative z-10 max-w-sm">
         {text}
       </p>
     </div>

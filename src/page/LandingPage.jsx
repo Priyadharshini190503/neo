@@ -7,6 +7,7 @@ import GrowthSection from '../Section/LandingPage/SupportWealthSection'
 import CuratedSolutionsSection from '../Section/LandingPage/CuratedSolutionsSection'
 import SectionZoom from '../components/SectionZoom'
 import Arvestadesign from '../Section/LandingPage/Arvestadesign'
+import InvestorSection from '../Section/LandingPage/InvestorSection'
 
 function LandingPage() {
   return (
@@ -16,23 +17,26 @@ function LandingPage() {
         <HeroSection />
       {/* </SectionZoom> */}
 
-      {/* <SectionZoom> */}
-        <AboutSection />
-      {/* </SectionZoom> */}
+      <Arvestadesign/>
 
+      <CuratedSolutionsSection />
       {/* <SectionZoom> */}
         <FinancingSection />
       {/* </SectionZoom> */}
 
-      <Arvestadesign/>
+      {/* <SectionZoom> */}
+        {/* <AboutSection /> */}
+      {/* </SectionZoom> */}
+
+      
+
+      
 
       {/* <SectionZoom> */}
         {/* <GrowthSection /> */}
       {/* </SectionZoom> */}
 
-
-
-      <CuratedSolutionsSection />
+      <InvestorSection />
 
 
 

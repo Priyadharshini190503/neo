@@ -73,11 +73,11 @@ const FinancingSection = () => {
       <div className="w-full pl-10 lg:pl-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
         {/* LEFT CONTENT */}
         <div>
-          <h2 className="font-instrument text-4xl md:text-[64px] leading-tight text-[#1c1b3a] mb-6">
+          <h2 className="font-instrument text-4xl md:text-[42px] lg:text-[42px] xl:text-[64px] leading-tight text-[#1c1b3a] mb-6">
             Financing Designed <br /> with Perspective
           </h2>
  
-          <p className="text-gray-600 md:text-[20px] max-w-md mb-6 font-montserrat text-[16px]">
+          <p className="text-gray-600  md:text-[16px] lg:text-[16px] max-w-md mb-6 font-montserrat text-[16px]">
             Financing needs rarely arise in isolation. At Arvesta, we always
             design lending solutions with an understanding of the broader
             financial context and aligned with client goals.

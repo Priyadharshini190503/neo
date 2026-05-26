@@ -32,9 +32,10 @@ const CuratedSolutionsSection = () => {
       <section
         id="curated"
         className="relative w-full overflow-hidden
-        bg-gradient-to-b from-white via-[#fff9ef] to-[#F0E8D7]"
+        bg-gradient-to-t from-[#FFF8E6] to-transparent"
       >
-        <div className="px-8 py-8">
+             
+        <div className="px-8">
           {/* IMAGE AREA */}
           {/* IMAGE AREA */}
 <div className="relative w-full h-full md:h-[620px]">
@@ -61,20 +62,20 @@ const CuratedSolutionsSection = () => {
     className="absolute inset-0 z-10 max-w-7xl mx-auto px-6 md:px-10
     flex flex-col justify-end pb-16 md:pb-30"
   >
-    <h2 className="font-instrument text-4xl lg:text-7xl text-white mb-4">
+    <h2 className="font-instrument text-4xl lg:text-[42px] xl:text-7xl text-white mb-4">
       Thoughtfully Curated Financing Solutions 
     </h2>
 
-    <p className="text-white max-w-3xl leading-6 font-montserrat
-      md:text-[20px] text-[16px]">
-      Arvesta provides a focused range of lending and financial solutions. Our role is not transactional. We focus on clarity, suitability, and long-term client alignment. 
+    <p className="text-white max-w-5xl leading-5 md:leading-6 font-montserrat
+     md:text-[14px] lg:text-[16px] xl:text-[20px] text-[12px]">
+We deliver a seamless borrowing experience designed for robustness and simplicity. By integrating advanced technology with rigorous institutional frameworks, we ensure rapid execution and capital access without compromising our core compliance and risk-management standards.
     </p>
   </div>
 </div>
 
 
           {/* CARD SECTION */}
-          <div className="relative -mt-10 z-20">
+          <div className="relative md:-mt-20 xl:-mt-10 -mt-10 z-20">
             <div className="max-w-7xl mx-auto px-10">
 
               {/* 🔹 MOBILE CAROUSEL */}
@@ -156,7 +157,7 @@ const CuratedSolutionsSection = () => {
           </div>
 
           {/* CTA BUTTON */}
-          <div className="w-full px-4 mt-16 md:max-w-7xl md:mx-auto md:px-10 md:pb-24 relative z-20">
+          {/* <div className="w-full px-4 mt-16 md:max-w-7xl md:mx-auto md:px-10 md:pb-24 relative z-20">
             <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=NeoNBFC@neo-group.in&su=Business%20Enquiry&body=Hello%20Team,%0A%0AI%20would%20like%20to%20know%20more%20about%20your%20services."
               target="_blank"
@@ -170,21 +171,21 @@ const CuratedSolutionsSection = () => {
                 <MdArrowOutward className="text-3xl" />
               </button>
             </a>
-          </div>
+          </div> */}
 
           {/* Mobile Image */}
-<img
+{/* <img
   src={bottomBorder1} // import your mobile version
   alt="Decorative Border Mobile"
   className="absolute bottom-0 left-0 w-full md:hidden h-auto"
-/>
+/> */}
 
 {/* Desktop Image */}
-<img
+{/* <img
   src={bottomBorder} // import your desktop version
   alt="Decorative Border Desktop"
   className="absolute bottom-0 left-0 w-full hidden md:block h-auto"
-/>
+/> */}
 
         </div>
       </section>
