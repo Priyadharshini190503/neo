@@ -108,7 +108,7 @@ const FinancialYearDropdown = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 max-h-[260px] w-full overflow-y-auto border border-t-0 border-black bg-white">
+        <div className="z-50 max-h-[210px] w-full overflow-y-auto border border-t-0 border-black bg-white pb-3 md:absolute md:left-0 md:top-full md:max-h-[260px] md:pb-0">
           {financialYears.map((year) => (
             <button
               key={year}
@@ -130,53 +130,89 @@ const FinancialYearDropdown = () => {
   );
 };
 
+const interestRateCardClass =
+  "rounded-[20px] border border-transparent px-8 md:px-24";
+
+const gradientBorderStyle = {
+  background:
+    "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(90deg, #AC8A3A 0%, #D9C381 18%, #F4EBCD 50%, #D9C381 82%, #AC8A3A 100%) border-box",
+};
+
 const InterestRate = () => (
-  <div className="mx-auto max-w-[1620px] bg-[#FFFFFF]">
-    <div className="relative z-30 rounded-[20px] border border-[#AC8A3A] bg-white px-8 py-7 shadow-[0_20px_55px_rgba(0,0,0,0.08),-24px_0_48px_rgba(0,0,0,0.05),24px_0_48px_rgba(0,0,0,0.05)] md:px-24">
-      <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
-        Interest Charged:{" "}
-        <span className="text-[#AC8A3A] ">15% PLR effective April 1, 2026.</span>
-      </h3>
-      <p className="mt-5 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px]">
-        The interest rates we offer to customers are linked to the Arvesta
-        Financial Services Prime Lending Rate, which reflects our cost of
-        raising funds from the capital markets. For the specific interest rates
-        charged by the Company, please refer to the Interest Rate Policy
-        available on the Company&apos;s website{" "}
-        <span className="text-[#AC8A3A]">(https://www.arvesta.in/).</span>
-      </p>
-    </div>
+  <div className="mx-auto max-w-[1620px] bg-[#FFFFFF] p-8">
+    <div className="flex flex-col">
+      
+      {/* Box 1: Top Card */}
+      <div 
+        className={`relative z-30 py-8 ${interestRateCardClass}`}
+        style={{
+          ...gradientBorderStyle,
+          boxShadow: '0 12px 24px -10px rgba(0,0,0,0.08), -10px 10px 20px -10px rgba(0,0,0,0.04), 10px 10px 20px -10px rgba(0,0,0,0.04)'
+        }}
+      >
+        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
+          Interest Charged:{" "}
+          <span className="text-[#AC8A3A] font-light">15% PLR effective April 1, 2026.</span>
+        </h3>
+        <p className="mt-4 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px] opacity-90">
+          The interest rates we offer to customers are linked to the Arvesta
+          Financial Services Prime Lending Rate, which reflects our cost of
+          raising funds from the capital markets. For the specific interest rates
+          charged by the Company, please refer to the Interest Rate Policy
+          available on the Company&apos;s website{" "}
+          <span className="text-[#AC8A3A] inline-flex items-center gap-1 cursor-pointer hover:underline">
+            (https://www.arvesta.in/). <span className="text-[12px]">↗</span>
+          </span>
+        </p>
+      </div>
 
-    <div className="relative z-20 -mt-[18px] rounded-[20px] border border-[#AC8A3A] bg-white px-8 pb-7 pt-12 shadow-[0_20px_55px_rgba(0,0,0,0.08),-24px_0_48px_rgba(0,0,0,0.05),24px_0_48px_rgba(0,0,0,0.05)] md:px-24">
-      <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
-        Penal charges:
-      </h3>
-      <p className="mt-3 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px]">
-        Any penalty charged shall be classified as &apos;penal charges.&apos;
-        There will be no capitalization of penal/default charges. These charges
-        are applied over and above the rate of interest and shall not impact the
-        standard procedures for the compounding of interest in the loan account.
-        Both the quantum and the reason for penal charges will be clearly
-        disclosed in the financing documents, loan agreement, and Key Fact
-        Statement (KFS), if applicable.
-      </p>
-    </div>
+      {/* Box 2: Middle Card */}
+      <div 
+        className={`relative z-20 -mt-[16px] pb-8 pt-12 ${interestRateCardClass}`}
+        style={{
+          ...gradientBorderStyle,
+          boxShadow: '0 14px 28px -10px rgba(0,0,0,0.09), -12px 12px 24px -12px rgba(0,0,0,0.05), 12px 12px 24px -12px rgba(0,0,0,0.05)'
+        }}
+      >
+        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
+          Penal charges:
+        </h3>
+        <p className="mt-3 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px] opacity-90">
+          Any penalty charged shall be classified as &apos;penal charges.&apos;
+          There will be no capitalization of penal/default charges. These charges
+          are applied over and above the rate of interest and shall not impact the
+          standard procedures for the compounding of interest in the loan account.
+          Both the quantum and the reason for penal charges will be clearly
+          disclosed in the financing documents, loan agreement, and Key Fact
+          Statement (KFS), if applicable. Whenever a reminder regarding non-compliance 
+          with the material terms and conditions of the loan is issued to Borrowers, the 
+          applicable penal charges and the underlying reason shall be communicated.
+        </p>
+      </div>
 
-    <div className="relative z-10 -mt-[18px] rounded-[20px] border border-[#AC8A3A] bg-white px-8 pb-7 pt-12 shadow-[0_20px_55px_rgba(0,0,0,0.08),-24px_0_48px_rgba(0,0,0,0.05),24px_0_48px_rgba(0,0,0,0.05)] md:px-24">
-      <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
-        Penal Default Charges:
-      </h3>
-      <p className="mt-3 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px]">
-        Rs.1000+ gst (as applicable) Penal Charges shall apply to the client.
-        Interest on Unpaid Interest will be applicable in accordance with the
-        Sanction Terms. Arvesta Financial Services Limited reserves the right to
-        exercise the option to Recall the loan upon a breach of the material
-        T&amp;C of the Sanction Terms.
-      </p>
+      {/* Box 3: Bottom Card */}
+      <div 
+        className={`relative z-10 -mt-[16px] pb-8 pt-12 ${interestRateCardClass}`}
+        style={{
+          ...gradientBorderStyle,
+          boxShadow: '0 18px 36px -10px rgba(0,0,0,0.12), -15px 15px 28px -12px rgba(0,0,0,0.06), 15px 15px 28px -12px rgba(0,0,0,0.06)'
+        }}
+      >
+        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
+          Penal Default Charges:
+        </h3>
+        <p className="mt-3 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px] opacity-90">
+          Rs. 1000+ gst (as appliacable) Penal Charges shall apply to the client.
+          Interest on Unpaid Interest will be applicable in accordance with the
+          Sanction Terms. Arvesta Financial Services Limited reserves the right to
+          exercise the option to Recall the loan upon a breach of the material
+          T&amp;C of the Sanction Terms.
+        </p>
+      </div>
+
     </div>
   </div>
 );
-
 const ContactGrid = () => (
   <div className="grid gap-x-24 gap-y-12 md:grid-cols-2 bg-[#FFFFFF]">
     {contacts.map((contact) => (
