@@ -27,8 +27,6 @@ const policies = [
 ];
 
 const getPdfViewUrl = (href) => `${href}#toolbar=0&navpanes=0`;
-const grievancePdfUrl =
-  "https://neo-zeta-five.vercel.app/assets/grievance-DOreQAvt.pdf#toolbar=0&navpanes=0";
 
 const contacts = [
   {
@@ -317,7 +315,7 @@ const ContactGrid = () => (
 
           {contact.href && (
             <a
-              href={grievancePdfUrl}
+              href={getPdfViewUrl(contact.href)}
               target="_blank"
               rel="noreferrer"
               className="mt-5 inline-flex items-center gap-1 font-montserrat font-semibold text-[#AC8A3A] underline underline-offset-2 text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed"
