@@ -43,7 +43,7 @@ const Footer = () => {
 
                 <span>License No: N-13.02545</span>
 
-                <span className="text-[#d6b36a]">|</span>
+                {/* <span className="text-[#d6b36a]">|</span>
 
                 <a
   href={`${grievancePdf}#toolbar=0`}
@@ -53,7 +53,7 @@ const Footer = () => {
 >
   Investor Contact
   <MdArrowOutward className="text-[17px]" />
-</a>
+</a> */}
               </div>
 
               <div className="flex items-start gap-2 font-montserrat">

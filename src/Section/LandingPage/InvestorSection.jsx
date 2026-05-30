@@ -8,6 +8,8 @@ import fairPracticePdf from "../../public/AFSPL- Fair Practice Code.pdf";
 import interestRatePdf from "../../public/AFSPL- Interest Rate Policy.pdf";
 import ombudsmanPdf from "../../public/AFSPL- Ombudsman Scheme.pdf";
 import riskManagementPdf from "../../public/AFSPL- Risk Management 1.pdf";
+import grievanceRedressalPdf from "../../public/AFSPL- Greivance Redressal Policy.pdf";
+import fitAndProperCriteriaPdf from "../../public/Fit and Proper Criteria Policy.pdf";
 import kycPdf from "../../public/kyc.pdf";
 import grievancePdf from "../../public/grievance.pdf";
 
@@ -20,15 +22,90 @@ const policies = [
   { label: "KYC & AML Policy", href: kycPdf },
   { label: "Interest Rate Policy", href: interestRatePdf },
   { label: "Fair Practices Code", href: fairPracticePdf },
+  { label: "Grievance Redressal Policy", href: grievanceRedressalPdf },
+  { label: "Fit and Proper Criteria Policy", href: fitAndProperCriteriaPdf },
 ];
 
 const getPdfViewUrl = (href) => `${href}#toolbar=0&navpanes=0`;
+const grievancePdfUrl =
+  "https://neo-zeta-five.vercel.app/assets/grievance-DOreQAvt.pdf#toolbar=0&navpanes=0";
 
 const contacts = [
-  "Registered Office and Corporate Office",
-  "Details of Company Secretary/Compliance Officer/Investor Grievance Officer",
-  "Details of Nodal Officer / Customer Grievances Redressal",
-  "Smart ODR Portal",
+  {
+    title: "Registered Office and Corporate Office",
+    details: (
+      <>
+        <p className="font-semibold">Arvesta Financial Services Private Limited</p>
+        <p>(prev. Neo Investment and Finserv Services Private Limited)</p>
+        <p>
+          <span className="font-semibold">Ph:</span> +91-22-66423600 |{" "}
+          <span className="font-semibold">Email:</span> NeoNBFC@neo-group.in |
+        </p>
+        <p>
+          <span className="font-semibold">CIN:</span> U64990MH2024PTC417309 |{" "}
+          <span className="font-semibold">www.arvesta.in</span>
+        </p>
+        <p>
+          <span className="font-semibold">Address:</span> 903 - B, Marathon Futurex,
+          NM Joshi Marg, Lower Parel, Mumbai, Maharashtra - 400013
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Customer Service Desk",
+    details: (
+      <>
+        <p>
+          <span className="font-semibold">Email:</span> support@arvesta.in
+        </p>
+        <p>
+          <span className="font-semibold">Contact Number:</span> 022-66423640
+        </p>
+        <p>
+          <span className="font-semibold">Operational Hours:</span> 9:30 AM to
+          5:30 PM, Monday to Friday, excluding public holidays.
+        </p>
+      </>
+    ),
+    href: grievancePdf,
+  },
+  {
+    title: "Grievance Redressal Officer (GRO)",
+    details: (
+      <>
+        <p>
+          <span className="font-semibold">Email:</span> grievance@arvesta.in
+        </p>
+        <p>
+          <span className="font-semibold">Contact Number:</span> 022-66423640
+        </p>
+        <p>
+          <span className="font-semibold">Office Address:</span> B 903 Marathon
+          Futurex, N M Joshi Marg, Lower Parel, Mumbai, Maharashtra, 400013
+        </p>
+      </>
+    ),
+    href: grievancePdf,
+  },
+  {
+    title: "Principal Nodal Officer (PNO)",
+    details: (
+      <>
+        <p>
+          <span className="font-semibold">Email:</span> nodalofficer@arvesta.in
+        </p>
+        <p>
+          <span className="font-semibold">Contact Number:</span> 022-66423640
+        </p>
+        <p>
+          <span className="font-semibold">Office Address:</span> B 903 Marathon
+          Futurex, N M Joshi Marg, Lower Parel, Mumbai, Maharashtra, 400013
+        </p>
+      </>
+    ),
+    href: grievancePdf,
+  },
 ];
 
 const MobileBottomBorder = () => (
@@ -60,18 +137,19 @@ const PolicyGrid = () => (
         key={`${policy.label}-${index}`}
         target="_blank"
         rel="noreferrer"
-        className="group border-b border-dashed border-[#AC8A3A]/50 pb-10"
+        className="group border-b border-dashed border-[#AC8A3A]/50 pb-4 md:pb-6 lg:pb-10"
       >
-        <p className="mb-4 font-montserrat text-[18px] text-[#8D8D8D] md:text-xl">
+        <p className="mb-4 font-montserrat text-[12px] text-[#8D8D8D] md:text-[14px]">
           May 2026
         </p>
 
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="max-w-[520px] font-montserrat text-[20px] font-semibold leading-snug text-[#AC8A3A] underline decoration-[#AC8A3A] underline-offset-4 md:text-xl">
-            {policy.label}
-          </h3>
-          <MdArrowOutward className="mt-1 shrink-0 text-xl text-[#AC8A3A] transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </div>
+        <div className="flex items-start">
+  <h3 className="max-w-[520px] font-montserrat text-[16px] font-semibold leading-snug text-[#AC8A3A] underline decoration-[#AC8A3A] underline-offset-4 md:text-[18px]">
+    {policy.label}
+  </h3>
+
+  <MdArrowOutward className="mt-1 shrink-0 text-xl text-[#AC8A3A] " />
+</div>
       </a>
     ))}
   </div>
@@ -108,7 +186,7 @@ const FinancialYearDropdown = () => {
       </button>
 
       {isOpen && (
-        <div className="z-50 max-h-[210px] w-full overflow-y-auto border border-t-0 border-black bg-white pb-3 md:absolute md:left-0 md:top-full md:max-h-[260px] md:pb-0">
+        <div className="z-50 max-h-[210px] w-full overflow-y-auto border border-t-0 border-black bg-white pb-3 md:max-h-[260px] md:pb-0">
           {financialYears.map((year) => (
             <button
               key={year}
@@ -131,7 +209,7 @@ const FinancialYearDropdown = () => {
 };
 
 const interestRateCardClass =
-  "rounded-[20px] border border-transparent px-8 md:px-24";
+  "rounded-[20px] border border-transparent px-8 lg:px-12 xl:px-24";
 
 const gradientBorderStyle = {
   background:
@@ -139,8 +217,8 @@ const gradientBorderStyle = {
 };
 
 const InterestRate = () => (
-  <div className="mx-auto max-w-[1620px] bg-[#FFFFFF] p-8">
-    <div className="flex flex-col">
+  <div className="mx-auto max-w-[1620px] bg-[#FFFFFF] lg:py-10">
+    <div className="flex flex-col gap-8">
       
       {/* Box 1: Top Card */}
       <div 
@@ -150,34 +228,42 @@ const InterestRate = () => (
           boxShadow: '0 12px 24px -10px rgba(0,0,0,0.08), -10px 10px 20px -10px rgba(0,0,0,0.04), 10px 10px 20px -10px rgba(0,0,0,0.04)'
         }}
       >
-        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
+        <h3 className="font-instrument leading-tight text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px]">
           Interest Charged:{" "}
           <span className="text-[#AC8A3A] font-light">15% PLR effective April 1, 2026.</span>
         </h3>
-        <p className="mt-4 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px] opacity-90">
+        <p className="mt-4 max-w-[1500px] text-[#1c1b3a] text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed font-montserrat opacity-90">
           The interest rates we offer to customers are linked to the Arvesta
           Financial Services Prime Lending Rate, which reflects our cost of
           raising funds from the capital markets. For the specific interest rates
           charged by the Company, please refer to the Interest Rate Policy
           available on the Company&apos;s website{" "}
-          <span className="text-[#AC8A3A] inline-flex items-center gap-1 cursor-pointer hover:underline">
-            (https://www.arvesta.in/). <span className="text-[12px]">↗</span>
-          </span>
+          <a
+  href="https://www.arvesta.in/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-[#AC8A3A] inline-flex items-center gap-1 hover:underline"
+>
+  (https://www.arvesta.in/).
+  <span className="text-[12px] md:text-[12px] lg:text-[16px] xl:text-[18px]">
+    ↗
+  </span>
+</a>
         </p>
       </div>
 
       {/* Box 2: Middle Card */}
       <div 
-        className={`relative z-20 -mt-[16px] pb-8 pt-12 ${interestRateCardClass}`}
+        className={`relative z-20 pb-8 pt-8 ${interestRateCardClass}`}
         style={{
           ...gradientBorderStyle,
           boxShadow: '0 14px 28px -10px rgba(0,0,0,0.09), -12px 12px 24px -12px rgba(0,0,0,0.05), 12px 12px 24px -12px rgba(0,0,0,0.05)'
         }}
       >
-        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
+        <h3 className="font-instrument text-[#2B2D2F] leading-tight text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px]">
           Penal charges:
         </h3>
-        <p className="mt-3 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px] opacity-90">
+        <p className="mt-3 max-w-[1500px] text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed font-montserrat text-[#1c1b3a] opacity-90">
           Any penalty charged shall be classified as &apos;penal charges.&apos;
           There will be no capitalization of penal/default charges. These charges
           are applied over and above the rate of interest and shall not impact the
@@ -192,16 +278,16 @@ const InterestRate = () => (
 
       {/* Box 3: Bottom Card */}
       <div 
-        className={`relative z-10 -mt-[16px] pb-8 pt-12 ${interestRateCardClass}`}
+        className={`relative z-10 pb-8 pt-8 ${interestRateCardClass}`}
         style={{
           ...gradientBorderStyle,
           boxShadow: '0 18px 36px -10px rgba(0,0,0,0.12), -15px 15px 28px -12px rgba(0,0,0,0.06), 15px 15px 28px -12px rgba(0,0,0,0.06)'
         }}
       >
-        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[28px] lg:text-[34px] xl:text-[42px]">
+        <h3 className="font-instrument text-[#2B2D2F] leading-tight text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px]">
           Penal Default Charges:
         </h3>
-        <p className="mt-3 max-w-[1500px] font-montserrat text-[17px] leading-relaxed text-[#1c1b3a] md:text-[15px] opacity-90">
+        <p className="mt-3 max-w-[1500px] text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed font-montserrat text-[#1c1b3a] opacity-90">
           Rs. 1000+ gst (as appliacable) Penal Charges shall apply to the client.
           Interest on Unpaid Interest will be applicable in accordance with the
           Sanction Terms. Arvesta Financial Services Limited reserves the right to
@@ -214,27 +300,68 @@ const InterestRate = () => (
   </div>
 );
 const ContactGrid = () => (
-  <div className="grid gap-x-24 gap-y-12 md:grid-cols-2 bg-[#FFFFFF]">
-    {contacts.map((contact) => (
-      <a
-        key={contact}
-        href={getPdfViewUrl(grievancePdf)}
-        target="_blank"
-        rel="noreferrer"
-        className="group border-b border-dotted border-[#000000] pb-10 md:pb-24"
-      >
-        <h3 className="font-instrument text-[24px] leading-tight text-[#2B2D2F] md:text-[30px] lg:text-[34px] xl:text-[42px]">
-          {contact}
-        </h3>
-      </a>
-    ))}
+  <div className="bg-[#FFFFFF]">
+    <div className="grid gap-x-10 md:grid-cols-2">
+      {contacts.map((contact) => (
+        <div
+          key={contact.title}
+          className="border-b border-[#7D7D7D] pb-6 pt-6 xl:pb-10 xl:pt-10 md:min-h-[205px]"
+        >
+          <h3 className="font-instrument leading-tight text-[#111111] font-instrument leading-tight text-[#111111] text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px]">
+            {contact.title}
+          </h3>
+
+          <div className="mt-5 max-w-[620px] font-montserrat text-[#141414] text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed">
+            {contact.details}
+          </div>
+
+          {contact.href && (
+            <a
+              href={grievancePdfUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-1 font-montserrat font-semibold text-[#AC8A3A] underline underline-offset-2 text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed"
+            >
+              View More
+              <MdArrowOutward className="text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed" />
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div className="max-w-[620px] border-b border-[#7D7D7D] pb-10 pt-7">
+      <h3 className="font-instrument leading-tight text-[#111111] font-instrument leading-tight text-[#111111] text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px]">
+        Smart ODR Portal
+      </h3>
+
+      <div className="mt-5 font-montserrat text-[#141414] text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed">
+        <p>
+          If you&apos;re dissatisfied with the resolution provided through SCORES,
+          you can get online dispute resolution within 90 days through the SMART
+          ODR Portal
+        </p>
+
+        <p className="mt-6">
+          Link to access -{" "}
+          <a
+            href="https://smartodr.in/login"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2"
+          >
+            https://smartodr.in/login
+          </a>
+        </p>
+      </div>
+    </div>
   </div>
 );
 
 const FinancialReporting = () => (
-  <div className="relative md:min-h-[420px] overflow-hidden pb-16 bg-[#FFFFFF]">
-    <div className="flex flex-col gap-8 px-8 py-16 md:flex-row md:items-center md:gap-24 md:px-14 lg:px-16 xl:px-28">
-      <label className="font-instrument text-[24px] md:text-[28px] text-[#1c1b3a] lg:text-[34px]">
+  <div className="relative xl:min-h-[320px]  overflow-hidden pb-16 bg-[#FFFFFF] md:px-6 px-4 lg:px-10 xl:px-20">
+    <div className="flex flex-col gap-8 py-16 md:flex-row md:items-start md:gap-24 ">
+      <label className="font-montserrat md:text-[18px] lg:text-[20px] text-[16px] text-[#1c1b3a]">
         Financial Year
       </label>
       
@@ -243,12 +370,14 @@ const FinancialReporting = () => (
     </div>
 
     <a
-      href="#"
-      className="mx-8 md:mt-16 flex max-w-[760px] items-start gap-8 font-montserrat text-[20px] font-semibold leading-tight text-[#AC8A3A] underline decoration-[#AC8A3A] underline-offset-4 md:px-8 lg:px-10 xl:px-20 md:text[18px] lg:text-[24px]"
-    >
-      Quarter and Financial Year ended Financial results - March 31, 2026
-      <MdArrowOutward className="shrink-0 md:text-2xl lg:text-3xl" />
-    </a>
+  href="#"
+  className="font-montserrat inline text-[#AC8A3A] font-semibold  md:text-[18px] text-[16px] "
+>
+  <span className="underline  underline-offset-4">
+    Quarter and Financial Year ended Financial results - March 31, 2026
+  </span>
+  <MdArrowOutward className="inline ml-1" />
+</a>
 
     <DesktopBottomBorder />
     <MobileBottomBorder />
@@ -261,7 +390,7 @@ const InvestorSection = () => {
   const renderContent = () => {
     if (activeTab === "Policies") {
       return (
-        <div className="relative overflow-hidden bg-[#FFFFFF] px-8 pb-24 pt-16 md:px-16 md:pb-28 md:pt-16 lg:px-20">
+        <div className="relative overflow-hidden bg-[#FFFFFF] md:px-10 px-6 lg:px-16 xl:px-26 pb-18 pt-10 md:pt-16 md:pb-16 lg:pb-16 md:pt-16 ">
           <PolicyGrid />
           <DesktopBottomBorder />
           <MobileBottomBorder />
@@ -271,7 +400,7 @@ const InvestorSection = () => {
 
     if (activeTab === "Interest Rate") {
       return (
-        <div className="relative overflow-hidden bg-[#FFFFFF] px-6 pb-24 pt-14 md:px-16 md:pb-28 md:pt-14 lg:px-20">
+        <div className="relative overflow-hidden bg-[#FFFFFF] px-6 pb-10 pt-10 md:px-12 md:pb-10 md:pt-10 lg:pt-6 lg:pb-6 lg:px-16 xl:px-26">
           <InterestRate />
           <DesktopBottomBorder />
           <MobileBottomBorder />
@@ -281,7 +410,7 @@ const InvestorSection = () => {
 
     if (activeTab === "Contact for Investors") {
       return (
-        <div className="relative overflow-hidden bg-[#FFFFFF] px-8 pb-24 pt-16 md:px-16 md:pb-28 md:pt-16 lg:px-20">
+        <div className="relative overflow-hidden bg-[#FFFFFF] px-8 pb-10 pt-3 md:px-12 md:pb-16 md:pt-6 lg:px-16 xl:px-26">
           <ContactGrid />
           <DesktopBottomBorder />
           <MobileBottomBorder />
@@ -295,23 +424,20 @@ const InvestorSection = () => {
   return (
     <section id="investor" className="w-full overflow-hidden bg-white">
       <div className="grid w-full grid-cols-1 overflow-hidden border-b border-white/20 bg-black md:grid-cols-2">
-        <div className="flex min-h-[430px] flex-col justify-center bg-[linear-gradient(to_bottom,_#000000_0%,_#231A3D_50%,_#000000_100%)] px-8 py-16 text-white md:px-6 lg:px-10 xl:px-20">
-          <h2 className="font-instrument leading-none text-4xl lg:text-[42px] xl:text-[64px]">
+        <div className="flex md:min-h-[430px] flex-col justify-center bg-[linear-gradient(to_bottom,_#000000_0%,_#231A3D_50%,_#000000_100%)] px-8 py-16 text-white md:px-6 lg:px-10 xl:px-20">
+          <h2 className="font-instrument leading-tight text-4xl lg:text-[42px] xl:text-[64px]">
             Investor Relations
           </h2>
 
-          <div className="mt-6 h-1 w-28 bg-[#AC8A3A]" />
+          <div className="mt-2 h-1 w-28 bg-[#AC8A3A]" />
 
-          <div className="mt-10 max-w-3xl xl:space-y-16 md:space-y-10 space-y-6 font-montserrat leading-relaxed text-white text-[12px] lg:text-[16px] xl:text-[20px]">
+          <div className="mt-5 max-w-3xl text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed font-montserrat text-white">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              pulvinar, nulla sed tempus dictum, elit metus efficitur ipsum,
-              non luctus lorem mauris nec lectus.
+              Arvesta Financial Services Limited is an NBFC registered with the Reserve Bank of India.
             </p>
 
-            <p>
-              Phasellus pretium risus et ipsum rhoncus cursus. Proin tristique
-              tellus congue euismod viverra.
+            <p className="mt-6">
+              Explore our financial results, policies, and other investor-related information below.
             </p>
           </div>
         </div>
@@ -325,23 +451,36 @@ const InvestorSection = () => {
         </div>
       </div>
 
-      <div className="border-b border-[#D5D5D5]">
-  <div className="overflow-x-auto">
-    <div className="flex flex-col gap-4 px-4 pt-6 md:min-w-max md:flex-row md:gap-12 md:px-6 lg:items-start lg:justify-between lg:px-10 xl:px-20 bg-[#FFFFFF]">
-      {tabs.map((tab) => (
-        <button
-          key={tab}
-          type="button"
-          onClick={() => setActiveTab(tab)}
-          className="w-fit whitespace-nowrap text-left font-instrument text-[24px] leading-tight text-black transition md:text-[28px] lg:text-[34px] xl:text-[42px]"
-        >
-          {tab}
-          {activeTab === tab && (
-            <span className="mt-2 block h-[2px] w-full bg-[#AC8A3A]" />
-          )}
-        </button>
-      ))}
+      <div className="bg-gradient-to-b from-[#FFFFFE] via-[#FFFBF1] to-[#FFF7E3]">
+  <div className="overflow-x-auto  hide-scrollbar">
+    
+    <div className="flex w-full min-w-max items-stretch gap-3 px-4 md:gap-8 md:px-6 lg:justify-between lg:gap-12 lg:px-10 xl:px-20">
+      
+      {tabs.map((tab) => {
+        const isActive = activeTab === tab;
+
+        return (
+          <button
+            key={tab}
+            type="button"
+            onClick={() => setActiveTab(tab)}
+            className={`relative flex h-[70px] md:h-[76px] lg:h-[80px] xl:h-[92px] items-end whitespace-nowrap px-4 pb-3 text-left font-instrument text-[22px] leading-none transition md:px-5 md:text-[30px] lg:px-6 lg:text-[32px] xl:text-[36px] ${
+              isActive
+                ? "bg-gradient-to-b from-[#FFFFFD] via-[#F3ECF6] to-[#ECE6EC] text-[#2B2832]"
+                : "text-[#8E897F] hover:text-[#2B2832]"
+            }`}
+          >
+            {tab}
+
+            {isActive && (
+              <span className="absolute bottom-0 left-0 block h-[4px] w-full bg-[#4A435F]" />
+            )}
+          </button>
+        );
+      })}
+      
     </div>
+
   </div>
 </div>
 

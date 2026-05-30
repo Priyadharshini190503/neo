@@ -62,12 +62,12 @@ const CuratedSolutionsSection = () => {
     className="absolute inset-0 z-10 max-w-7xl mx-auto px-6 md:px-10
     flex flex-col justify-end pb-16 md:pb-30"
   >
-    <h2 className="font-instrument text-4xl lg:text-[42px] xl:text-7xl text-white mb-4">
+    <h2 className="font-instrument leading-tight text-4xl lg:text-[42px] xl:text-[64px] text-white mb-5">
       Thoughtfully Curated Financing Solutions 
     </h2>
 
-    <p className="text-white max-w-5xl leading-5 md:leading-6 font-montserrat
-     md:text-[14px] lg:text-[16px] xl:text-[20px] text-[12px]">
+    <p className="text-white max-w-5xl font-montserrat
+     text-[12px] md:text-[12px] lg:text-[16px]  xl:text-[18px] leading-relaxed">
 We deliver a seamless borrowing experience designed for robustness and simplicity. By integrating advanced technology with rigorous institutional frameworks, we ensure rapid execution and capital access without compromising our core compliance and risk-management standards.
     </p>
   </div>
@@ -83,17 +83,17 @@ We deliver a seamless borrowing experience designed for robustness and simplicit
 
   {/* LEFT ARROW — OUTSIDE */}
   <button
-    onClick={() =>
-      setCurrentIndex(
-        currentIndex === 0 ? cardData.length - 1 : currentIndex - 1
-      )
-    }
-    className="absolute -left-10 top-1/2 -translate-y-1/2 z-30
-    bg-[#AC8A38] border border-[#d6b36a]
-    rounded-full p-2 shadow-md"
-  >
-    <LuArrowLeft className="text-white text-lg" />
-  </button>
+  onClick={() =>
+    setCurrentIndex(
+      currentIndex === 0 ? cardData.length - 1 : currentIndex - 1
+    )
+  }
+  className="absolute -left-10 top-1/2 -translate-y-1/2 z-30
+  bg-[#AC8A38] border border-[#d6b36a]
+  rounded-full w-9 h-9 flex items-center justify-center shadow-md"
+>
+  <LuArrowLeft className="text-white text-lg" />
+</button>
 
   {/* CARD WRAPPER (keeps clipping) */}
   <div className="overflow-hidden">
@@ -118,15 +118,15 @@ We deliver a seamless borrowing experience designed for robustness and simplicit
 
   {/* RIGHT ARROW — OUTSIDE */}
   <button
-    onClick={() =>
-      setCurrentIndex((currentIndex + 1) % cardData.length)
-    }
-    className="absolute -right-10 top-1/2 -translate-y-1/2 z-30
-    bg-[#AC8A38] border border-[#d6b36a]
-    rounded-full p-2 shadow-md"
-  >
-    <LuArrowRight className="text-white text-lg" />
-  </button>
+  onClick={() =>
+    setCurrentIndex((currentIndex + 1) % cardData.length)
+  }
+  className="absolute -right-10 top-1/2 -translate-y-1/2 z-30
+  bg-[#AC8A38] border border-[#d6b36a]
+  rounded-full w-9 h-9 flex items-center justify-center shadow-md"
+>
+  <LuArrowRight className="text-white text-lg" />
+</button>
 
 </div>
 

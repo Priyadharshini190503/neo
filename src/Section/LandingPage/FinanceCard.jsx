@@ -3,7 +3,7 @@ import mandala from "../../assets/HeroImage/mandala.gif";
 const FinanceCard = ({ title, text, isActive }) => {
   return (
     <div
-      className={`relative min-w-[320px] md:min-w-[360px] h-[460px] rounded-2xl px-10 py-12 overflow-hidden shadow-xl
+      className={`relative h-[380px] min-w-[280px] overflow-hidden rounded-2xl px-7 py-9 shadow-xl md:h-[460px] md:min-w-[360px] md:px-10 md:py-12
       flex flex-col justify-center transition-all duration-500
       ${
         isActive
@@ -14,10 +14,10 @@ const FinanceCard = ({ title, text, isActive }) => {
       <img
         src={mandala}
         alt="Mandala"
-        className="absolute -top-12 -right-12 w-56 opacity-15 pointer-events-none"
+        className="pointer-events-none absolute -right-10 -top-10 w-44 opacity-15 md:-right-12 md:-top-12 md:w-56"
       />
 
-      <h3 className="font-instrument text-[32px] md:text-[46px] leading-tight mb-6 relative z-10">
+      <h3 className="relative z-10 mb-5 font-instrument md:mb-6 leading-tight text-4xl lg:text-[42px] xl:text-[46px]">
         {title === "ESOP Financing" ? (
     <>
       ESOP <br /> Financing
@@ -27,7 +27,7 @@ const FinanceCard = ({ title, text, isActive }) => {
   )}
       </h3>
 
-      <p className="font-montserrat text-[16px] md:text-[14px] mdLtext-[16px] xl:text-[20px] leading-relaxed relative z-10 max-w-sm">
+      <p className="relative z-10 max-w-sm font-montserrat text-[12px] leading-relaxed md:text-[12px] lg:text-[16px] xl:text-[18px]">
         {text}
       </p>
     </div>
