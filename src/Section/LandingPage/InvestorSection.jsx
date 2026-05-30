@@ -104,6 +104,30 @@ const contacts = [
     ),
     href: grievancePdf,
   },
+  {
+    title: "Smart ODR Portal",
+    details: (
+      <>
+        <p>
+          If you're dissatisfied with the resolution provided through SCORES,
+          you can get online dispute resolution within 90 days through the
+          SMART ODR Portal.
+        </p>
+
+        <p className="mt-6">
+          Link to access -{" "}
+          <a
+            href="https://smartodr.in/login"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2"
+          >
+            https://smartodr.in/login
+          </a>
+        </p>
+      </>
+    ),
+  },
 ];
 
 const MobileBottomBorder = () => (
@@ -328,7 +352,7 @@ const ContactGrid = () => (
       ))}
     </div>
 
-    <div className="max-w-[620px] border-b border-[#7D7D7D] pb-10 pt-7">
+    {/* <div className="max-w-[620px] border-b border-[#7D7D7D] pb-10 pt-7">
       <h3 className="font-instrument leading-tight text-[#111111] font-instrument leading-tight text-[#111111] text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px]">
         Smart ODR Portal
       </h3>
@@ -352,7 +376,7 @@ const ContactGrid = () => (
           </a>
         </p>
       </div>
-    </div>
+    </div> */}
   </div>
 );
 
