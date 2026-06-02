@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../assets/logo.png";
-import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
   return (
     <nav className="w-full shadow-md overflow-hidden snap-start" >
 

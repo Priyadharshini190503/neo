@@ -1,30 +1,16 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MdArrowOutward } from "react-icons/md";
 import investorImg from "../../assets/investor.png";
 import bottomBorder from "../../assets/HeroImage/bottom-border.png";
 import bottomBorderMobile from "../../assets/About/bottom.png";
 import { IoChevronDown } from "react-icons/io5";
-import fairPracticePdf from "../../public/AFSPL- Fair Practice Code.pdf";
-import interestRatePdf from "../../public/AFSPL- Interest Rate Policy.pdf";
-import ombudsmanPdf from "../../public/AFSPL- Ombudsman Scheme.pdf";
-import riskManagementPdf from "../../public/AFSPL- Risk Management 1.pdf";
-import grievanceRedressalPdf from "../../public/AFSPL- Greivance Redressal Policy.pdf";
-import fitAndProperCriteriaPdf from "../../public/Fit and Proper Criteria Policy.pdf";
-import kycPdf from "../../public/kyc.pdf";
 import grievancePdf from "../../public/grievance.pdf";
+import { fetchFinancialReports, fetchPolicies } from "../../services/policyApi";
+import { getPolicyViewerUrl } from "../../utils/policyViewer";
+import { sortPoliciesByUpload } from "../../utils/policySort";
 
 
 const tabs = ["Financial Reporting", "Policies", "Interest Rate", "Contact for Investors"];
-
-const policies = [
-  { label: "Risk Management Policy", href: riskManagementPdf },
-  { label: "Ombudsman Scheme", href: ombudsmanPdf },
-  { label: "KYC & AML Policy", href: kycPdf },
-  { label: "Interest Rate Policy", href: interestRatePdf },
-  { label: "Fair Practices Code", href: fairPracticePdf },
-  { label: "Grievance Redressal Policy", href: grievanceRedressalPdf },
-  { label: "Fit and Proper Criteria Policy", href: fitAndProperCriteriaPdf },
-];
 
 const getPdfViewUrl = (href) => `${href}#toolbar=0&navpanes=0`;
 
@@ -145,40 +131,129 @@ const DesktopBottomBorder = () => (
     className="absolute bottom-0 left-0 hidden h-auto w-full md:block"
   />
 );
-const financialYears = [];
+const currentYear = new Date().getFullYear();
+const currentMonth = new Date().getMonth() + 1;
+const currentFinancialYearStart = currentMonth >= 4 ? currentYear : currentYear - 1;
+const financialYears = Array.from({ length: 12 }, (_, index) => {
+  const startYear = currentFinancialYearStart - index;
+  return `${startYear}-${startYear + 1}`;
+});
 
-for (let year = 2026; year >= 800; year--) {
-  financialYears.push(`${year}-${year + 1}`);
-}
+const getPolicyDate = (policy) =>
+  `${policy.monthName || "Month"} ${policy.year || ""}`.trim();
 
-const PolicyGrid = () => (
-  <div className="grid gap-x-16 gap-y-6 md:grid-cols-2 xl:grid-cols-3 bg-[#FFFFFF]">
-    {policies.map((policy, index) => (
-      <a
-        href={getPdfViewUrl(policy.href)}
-        key={`${policy.label}-${index}`}
-        target="_blank"
-        rel="noreferrer"
-        className="group border-b border-dashed border-[#AC8A3A]/50 pb-4 md:pb-6 lg:pb-10"
-      >
-        <p className="mb-4 font-montserrat text-[12px] text-[#8D8D8D] md:text-[14px]">
-          May 2026
-        </p>
+const getFinancialYear = (document) => {
+  const year = Number(document.year);
+  const month = Number(document.month);
+  const startYear = month >= 4 ? year : year - 1;
+  return `${startYear}-${startYear + 1}`;
+};
 
-        <div className="flex items-start">
-  <h3 className="max-w-[520px] font-montserrat text-[16px] font-semibold leading-snug text-[#AC8A3A] underline decoration-[#AC8A3A] underline-offset-4 md:text-[18px]">
-    {policy.label}
-  </h3>
+const getReportingDate = (document) => {
+  if (document.reportDate) {
+    const date = new Date(`${document.reportDate}T00:00:00`);
+    return date.toLocaleDateString("en", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  }
 
-  <MdArrowOutward className="mt-1 shrink-0 text-xl text-[#AC8A3A] " />
-</div>
-      </a>
-    ))}
-  </div>
-);
+  const year = Number(document.year);
+  const month = Number(document.month);
+  const day = new Date(year, month, 0).getDate();
+  const monthName =
+    document.monthName ||
+    new Date(year, month - 1, 1).toLocaleString("en", { month: "long" });
 
-const FinancialYearDropdown = () => {
-  const [selectedYear, setSelectedYear] = useState(financialYears[0]);
+  return `${monthName} ${day}, ${year}`;
+};
+
+const getFinancialReportTitle = (report) => {
+  const hasDateSuffix = /-\s+[A-Za-z]+\s+\d{1,2},\s+\d{4}$/.test(report.name);
+  return hasDateSuffix ? report.name : `${report.name} - ${getReportingDate(report)}`;
+};
+
+const PolicyGrid = () => {
+  const [uploadedPolicies, setUploadedPolicies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const sortedPolicies = useMemo(
+    () => sortPoliciesByUpload(uploadedPolicies),
+    [uploadedPolicies]
+  );
+
+  useEffect(() => {
+    const loadPolicies = async () => {
+      setError("");
+      setIsLoading(true);
+
+      try {
+        const data = await fetchPolicies();
+        setUploadedPolicies(data);
+      } catch (apiError) {
+        setError(apiError.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadPolicies();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <p className="font-montserrat text-[14px] text-[#8D8D8D] md:text-[16px]">
+        Loading policies...
+      </p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p className="font-montserrat text-[14px] text-red-700 md:text-[16px]">
+        {error}
+      </p>
+    );
+  }
+
+  if (sortedPolicies.length === 0) {
+    return (
+      <p className="font-montserrat text-[14px] text-[#8D8D8D] md:text-[16px]">
+        No policy documents have been uploaded yet.
+      </p>
+    );
+  }
+
+  return (
+    <div className="grid gap-x-16 gap-y-6 bg-[#FFFFFF] md:grid-cols-2 xl:grid-cols-3">
+      {sortedPolicies.map((policy) => (
+        <a
+          href={getPolicyViewerUrl(policy.url, policy.name)}
+          key={policy.id}
+          target="_blank"
+          rel="noreferrer"
+          className="group border-b border-dashed border-[#AC8A3A]/50 pb-4 md:pb-6 lg:pb-10"
+        >
+          <p className="mb-4 font-montserrat text-[12px] text-[#8D8D8D] md:text-[14px]">
+            {getPolicyDate(policy)}
+          </p>
+
+          <div className="flex items-start">
+            <h3 className="max-w-[520px] font-montserrat text-[16px] font-semibold leading-snug text-[#AC8A3A] underline decoration-[#AC8A3A] underline-offset-4 md:text-[18px]">
+              {policy.name}
+            </h3>
+
+            <MdArrowOutward className="mt-1 shrink-0 text-xl text-[#AC8A3A]" />
+          </div>
+        </a>
+      ))}
+    </div>
+  );
+};
+
+const FinancialYearDropdown = ({ years, selectedYear, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -209,12 +284,12 @@ const FinancialYearDropdown = () => {
 
       {isOpen && (
         <div className="z-50 max-h-[210px] w-full overflow-y-auto border border-t-0 border-black bg-white pb-3 md:max-h-[260px] md:pb-0">
-          {financialYears.map((year) => (
+          {years.map((year) => (
             <button
               key={year}
               type="button"
               onClick={() => {
-                setSelectedYear(year);
+                onChange(year);
                 setIsOpen(false);
               }}
               className={`block h-9 w-full px-4 text-left font-montserrat text-[16px] text-[#231A3D] hover:bg-[#F3EFE5] md:px-5 md:text-[18px] lg:text-[20px] ${
@@ -380,31 +455,95 @@ const ContactGrid = () => (
   </div>
 );
 
-const FinancialReporting = () => (
-  <div className="relative xl:min-h-[320px]  overflow-hidden pb-16 bg-[#FFFFFF] md:px-6 px-4 lg:px-10 xl:px-20">
-    <div className="flex flex-col gap-8 py-16 md:flex-row md:items-start md:gap-24 ">
-      <label className="font-montserrat md:text-[18px] lg:text-[20px] text-[16px] text-[#1c1b3a]">
-        Financial Year
-      </label>
-      
+const FinancialReporting = () => {
+  const [reports, setReports] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(financialYears[0]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
-      <FinancialYearDropdown />
+  const yearOptions = useMemo(() => {
+    const uploadedYears = reports.map(getFinancialYear);
+    return [...new Set([...financialYears, ...uploadedYears])].sort((a, b) =>
+      b.localeCompare(a)
+    );
+  }, [reports]);
+
+  const filteredReports = useMemo(
+    () =>
+      sortPoliciesByUpload(reports).filter(
+        (report) => getFinancialYear(report) === selectedYear
+      ),
+    [reports, selectedYear]
+  );
+
+  useEffect(() => {
+    const loadReports = async () => {
+      setError("");
+      setIsLoading(true);
+
+      try {
+        const data = await fetchFinancialReports();
+        setReports(data);
+      } catch (apiError) {
+        setError(apiError.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadReports();
+  }, []);
+
+  return (
+    <div className="relative overflow-hidden bg-[#FFFFFF] px-4 pb-16 md:px-6 lg:px-10 xl:min-h-[320px] xl:px-20">
+      <div className="flex flex-col gap-8 py-16 md:flex-row md:items-start md:gap-24 ">
+        <label className="font-montserrat text-[16px] text-[#1c1b3a] md:text-[18px] lg:text-[20px]">
+          Financial Year
+        </label>
+
+        <FinancialYearDropdown
+          years={yearOptions}
+          selectedYear={selectedYear}
+          onChange={setSelectedYear}
+        />
+      </div>
+
+      {isLoading ? (
+        <p className="font-montserrat text-[14px] text-[#8D8D8D] md:text-[16px]">
+          Loading financial reports...
+        </p>
+      ) : error ? (
+        <p className="font-montserrat text-[14px] text-red-700 md:text-[16px]">
+          {error}
+        </p>
+      ) : filteredReports.length === 0 ? (
+        <p className="font-montserrat text-[14px] text-[#8D8D8D] md:text-[16px]">
+          No financial reporting documents have been uploaded for {selectedYear}.
+        </p>
+      ) : (
+        <div className="flex flex-col items-start gap-6 bg-[#FFFFFF]">
+          {filteredReports.map((report) => (
+            <a
+              href={getPolicyViewerUrl(report.url, report.name)}
+              key={report.id}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex w-full items-start font-montserrat text-[16px] font-semibold leading-snug text-[#AC8A3A] md:text-[18px]"
+            >
+              <span className="underline decoration-[#AC8A3A] underline-offset-4">
+                {getFinancialReportTitle(report)}
+              </span>
+              <MdArrowOutward className="mt-0.5 shrink-0 text-xl text-[#AC8A3A]" />
+            </a>
+          ))}
+        </div>
+      )}
+
+      <DesktopBottomBorder />
+      <MobileBottomBorder />
     </div>
-
-    <a
-  href="#"
-  className="font-montserrat inline text-[#AC8A3A] font-semibold  md:text-[18px] text-[16px] "
->
-  <span className="underline  underline-offset-4">
-    Quarter and Financial Year ended Financial results - March 31, 2026
-  </span>
-  <MdArrowOutward className="inline ml-1" />
-</a>
-
-    <DesktopBottomBorder />
-    <MobileBottomBorder />
-  </div>
-);
+  );
+};
 
 const InvestorSection = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
